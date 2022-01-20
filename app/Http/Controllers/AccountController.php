@@ -18,6 +18,7 @@ class AccountController extends Controller
     public function account(): View
     {
         return view('account.account', [
+            'title' => __('Account'),
             'user' => Auth::user(),
         ]);
     }
@@ -38,7 +39,9 @@ class AccountController extends Controller
      */
     public function password(): View
     {
-        return view('account.password');
+        return view('account.password', [
+            'title' => __('Change Password'),
+        ]);
     }
 
     /**
