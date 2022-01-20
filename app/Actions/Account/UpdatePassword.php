@@ -2,8 +2,8 @@
 
 namespace App\Actions\Account;
 
+use App\Events\User\PasswordUpdated;
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Lorisleiva\Actions\Concerns\AsObject;
 
@@ -20,6 +20,8 @@ final class UpdatePassword
     {
         $user->password = Hash::make($password);
         $user->save();
+
+        event(new PasswordUpdated($user));
 
         return $user;
     }
