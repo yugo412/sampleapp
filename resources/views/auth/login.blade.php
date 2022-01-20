@@ -28,8 +28,6 @@
 
             <button type="submit">@lang('Log In')</button>
         </form>
-
-        <a href="{{ route('password.request') }}">@lang('I forgot my password')</a>
     </article>
 </div>
 @endsection

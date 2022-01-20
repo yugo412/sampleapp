@@ -24,6 +24,7 @@
                 @else
                     <li><a href="{{ route('login') }}">@lang('Log In')</a></li>
                     <li><a href="{{ route('register') }}">@lang('Register')</a></li>
+                    <li><a href="{{ route('password.request') }}">@lang('Forgot Password?')</a></li>
                 @endauth
             </ul>
         </nav>

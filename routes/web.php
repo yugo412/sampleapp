@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class);
 
 Route::middleware('auth')->group(function () {
-    Route::get('profile', [AccountController::class, 'profile'])->name('profile');
-    Route::patch('profile', [AccountController::class, 'updateProfile'])->name('profile.update');
-    Route::get('password', [AccountController::class, 'password'])
-        ->middleware('verified')
-        ->name('password');
+    Route::middleware('verified')->group(function () {
+        Route::get('profile', [AccountController::class, 'profile'])->name('profile');
+        Route::patch('profile', [AccountController::class, 'updateProfile']);
+    });
+    Route::get('password', [AccountController::class, 'password'])->name('password');
     Route::patch('password', [AccountController::class, 'updatePassword']);
 });

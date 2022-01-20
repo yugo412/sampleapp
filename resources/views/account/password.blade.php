@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="row">
-    <div class="col-x-12 col-md-4">
+    <div class="col-xs-12 col-md-4">
         @include('account.aside')
     </div>
 
-    <div class="col-x-12 col-md-8">
+    <div class="col-xs-12 col-md-8">
         <article>
-            <form action="{{ url('password') }}" method="post">
+            <form action="{{ route('password') }}" method="post">
                 @csrf
                 @method('patch')
 

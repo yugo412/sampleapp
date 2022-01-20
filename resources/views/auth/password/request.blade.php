@@ -20,8 +20,6 @@
                 <button type="submit">@lang('Send Link')</button>
             </label>
         </form>
-
-        <a href="{{ route('password.request') }}">@lang('I forgot my password')</a>
     </article>
 </div>
 @endsection
