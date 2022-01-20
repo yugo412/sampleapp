@@ -1,0 +1,10 @@
+name: sampleapp
+recipe: laravel
+config:
+  php: 7.4
+  mysql: 5.7
+  cache: redis
+  webroot: ./public
+services:
+  mailhog:
+    type: mailhog
