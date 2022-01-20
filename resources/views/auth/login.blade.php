@@ -21,7 +21,7 @@
             </label>
 
             <label for="remember">
-                <input type="checkbox" name="remember" role="switch" indeterminate="true">
+                <input type="checkbox" name="remember" role="switch" indeterminate="true" checked>
                 @lang('Remember me')
             </label>
 
