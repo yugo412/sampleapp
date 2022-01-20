@@ -20,7 +20,7 @@
             </ul>
             <ul>
                 @auth
-                    <li><a href="{{ route('account') }}">@lang('Account (:name)', ['name' => auth()->user()->name])</a></li>
+                    <li><a href="{{ route('profile') }}">@lang('Account (:name)', ['name' => auth()->user()->name])</a></li>
                 @else
                     <li><a href="{{ route('login') }}">@lang('Log In')</a></li>
                     <li><a href="{{ route('register') }}">@lang('Register')</a></li>

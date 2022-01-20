@@ -3,7 +3,7 @@
 @section('content')
 <div class="grid">
     <article>
-        <form action="{{ route('login') }}" method="post">
+        <form action="{{ route('password.email') }}" method="post">
             @csrf
             @method('post')
 
@@ -14,19 +14,11 @@
                     <small>{{ $message }}</small>
                 @enderror
             </label>
-            
-            <label for="password">
-                @lang('Password')
-                <input type="password" name="password" @error('password') aria-invalid="true" @enderror>
+
+
+            <label for="buttons">
+                <button type="submit">@lang('Send Link')</button>
             </label>
-
-            <label for="remember">
-                <input type="checkbox" name="remember" role="switch" indeterminate="true" checked>
-                @lang('Remember me')
-            </label>
-
-
-            <button type="submit">@lang('Log In')</button>
         </form>
 
         <a href="{{ route('password.request') }}">@lang('I forgot my password')</a>

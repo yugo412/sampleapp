@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Account\UpdateAccount;
 use App\Actions\Account\UpdatePassword;
+use App\Actions\Account\UpdateProfile;
 use App\Http\Requests\Account\UpdateAccountRequest;
 use App\Http\Requests\Account\UpdatePasswordRequest;
 use Illuminate\Contracts\View\View;
@@ -15,10 +15,10 @@ class AccountController extends Controller
     /**
      * @return View
      */
-    public function account(): View
+    public function profile(): View
     {
-        return view('account.account', [
-            'title' => __('Account'),
+        return view('account.profile', [
+            'title' => __('Profile'),
             'user' => Auth::user(),
         ]);
     }
@@ -27,11 +27,11 @@ class AccountController extends Controller
      * @param UpdateAccountRequest $request
      * @return RedirectResponse
      */
-    public function updateAccount(UpdateAccountRequest $request): RedirectResponse
+    public function updateProfile(UpdateAccountRequest $request): RedirectResponse
     {
-        $user = UpdateAccount::run(Auth::user(), $request->validated());
+        $user = UpdateProfile::run(Auth::user(), $request->validated());
 
-        return redirect()->route('account', compact('user'));
+        return redirect()->route('profile', compact('user'));
     }
 
     /**

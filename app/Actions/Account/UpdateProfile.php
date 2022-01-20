@@ -2,11 +2,11 @@
 
 namespace App\Actions\Account;
 
-use App\Events\User\AccountUpdated;
+use App\Events\User\ProfileUpdated;
 use Illuminate\Foundation\Auth\User;
 use Lorisleiva\Actions\Concerns\AsObject;
 
-final class UpdateAccount
+final class UpdateProfile
 {
     use AsObject;
 
@@ -19,7 +19,7 @@ final class UpdateAccount
     {
         $user->update($params);
 
-        event(new AccountUpdated($user));
+        event(new ProfileUpdated($user));
 
         return $user;
     }

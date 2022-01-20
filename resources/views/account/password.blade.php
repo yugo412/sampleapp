@@ -8,7 +8,7 @@
 
     <div class="col-x-12 col-md-8">
         <article>
-            <form action="{{ route('password.update') }}" method="post">
+            <form action="{{ url('password') }}" method="post">
                 @csrf
                 @method('patch')
 
