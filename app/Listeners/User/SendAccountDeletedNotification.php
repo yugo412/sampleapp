@@ -6,7 +6,7 @@ use App\Notifications\User\AccountDeleted;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendAccountDeletedNotification
+class SendAccountDeletedNotification implements ShouldQueue
 {
     /**
      * Create the event listener.

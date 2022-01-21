@@ -6,7 +6,7 @@ use App\Notifications\User\LoggedIn;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendLoginNotification
+class SendLoginNotification implements ShouldQueue
 {
     /**
      * Create the event listener.

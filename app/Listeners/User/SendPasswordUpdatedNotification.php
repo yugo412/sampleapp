@@ -6,7 +6,7 @@ use App\Notifications\User\PasswordUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendPasswordUpdatedNotification
+class SendPasswordUpdatedNotification implements ShouldQueue
 {
     /**
      * Create the event listener.

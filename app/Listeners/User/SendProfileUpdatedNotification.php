@@ -6,7 +6,7 @@ use App\Notifications\User\ProfileUpdated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendProfileUpdatedNotification
+class SendProfileUpdatedNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
