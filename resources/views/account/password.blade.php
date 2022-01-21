@@ -8,6 +8,8 @@
 
     <div class="col-xs-12 col-md-8">
         <article>
+            <h4>{{ $title }}</h4>
+            
             <form action="{{ route('password') }}" method="post">
                 @csrf
                 @method('patch')

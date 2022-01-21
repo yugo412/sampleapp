@@ -8,6 +8,17 @@
 
     <div class="col-xs-12 col-md-8">
         <article>
+            <h4>{{ $title }}</h4>
+            
+            <form method="post" id="verification-form" action="{{ route('verification.send') }}">
+                @csrf
+                @method('post')
+            </form
+
+            @if (auth()->check() and !auth()->user()->hasVerifiedEmail())
+                <p>@lang('Your email is not verified. Some features may not accessible because of it. Click :link to resend email verification.', ['link' => '<a href="#" onclick="event.preventDefault(); document.getElementById(\'verification-form\').submit();">here</a>'])</p>
+            @endif
+
             <form action="{{ route('profile') }}" method="post">
                 @csrf
                 @method('patch')
