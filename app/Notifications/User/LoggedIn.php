@@ -4,6 +4,7 @@ namespace App\Notifications\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -12,13 +13,18 @@ class LoggedIn extends Notification
     use Queueable;
 
     /**
+     * @var User
+     */
+    private User $user;
+
+    /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -42,6 +48,7 @@ class LoggedIn extends Notification
     {
         return (new MailMessage)
             ->subject('Login Notification')
+            ->line(__('Hello, :name!', ['name' => $this->user->name]))
             ->line(__('Someone is logged in using your account at :app. Ignore this message if it was you.', ['app' => config('app.name')]));
     }
 

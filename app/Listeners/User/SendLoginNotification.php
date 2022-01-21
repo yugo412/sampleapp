@@ -26,6 +26,6 @@ class SendLoginNotification
      */
     public function handle($event)
     {
-        $event->user->notify(new LoggedIn);
+        $event->user->notify(new LoggedIn($event->user));
     }
 }
