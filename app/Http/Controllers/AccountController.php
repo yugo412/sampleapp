@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Account\DeleteAccountPermanently;
 use App\Actions\Account\UpdatePassword;
 use App\Actions\Account\UpdateProfile;
+use App\Http\Requests\Account\DeleteAccountRequest;
 use App\Http\Requests\Account\UpdateAccountRequest;
 use App\Http\Requests\Account\UpdatePasswordRequest;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -53,5 +57,26 @@ class AccountController extends Controller
         UpdatePassword::run(Auth::user(), $request->password);
 
         return redirect()->route('password');
+    }
+
+    /**
+     * @return View
+     */
+    public function delete(): View
+    {
+        return view('account.delete', [
+            'title' => __('Delete Account'),
+        ]);
+    }
+
+    /**
+     * @param DeleteAccountRequest $request
+     * @return RedirectResponse
+     */
+    public function deletePermanently(DeleteAccountRequest $request): RedirectResponse
+    {
+        DeleteAccountPermanently::run(Auth::user());
+            
+        return redirect()->route('home');
     }
 }

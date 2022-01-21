@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::middleware('verified')->group(function () {
-        Route::get('profile', [AccountController::class, 'profile'])->name('profile');
-        Route::patch('profile', [AccountController::class, 'updateProfile']);
-    });
+    Route::get('profile', [AccountController::class, 'profile'])->name('profile');
+    Route::patch('profile', [AccountController::class, 'updateProfile']);
+    
     Route::get('password', [AccountController::class, 'password'])->name('password');
     Route::patch('password', [AccountController::class, 'updatePassword']);
+
+    Route::get('delete', [AccountController::class, 'delete'])->name('delete');
+    Route::post('delete', [AccountController::class, 'deletePermanently']);
 });

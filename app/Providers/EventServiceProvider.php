@@ -26,9 +26,11 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\User\PasswordUpdated::class => [
             \App\Listeners\User\SendPasswordUpdatedNotification::class,
         ],
-
         \App\Events\User\ProfileUpdated::class => [
             \App\Listeners\User\SendProfileUpdatedNotification::class,
+        ],
+        \App\Events\User\AccountDeleted::class => [
+            \App\Listeners\User\SendAccountDeletedNotification::class,
         ],
     ];
 
