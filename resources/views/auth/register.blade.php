@@ -9,7 +9,7 @@
 
             <label for="name">
                 @lang('Name')
-                <input type="text" name="name" value="{{ old('name') }}" @error('name') aria-invalid="true" @enderror>
+                <input type="text" name="name" value="{{ old('name') }}" @error('name') aria-invalid="true" @enderror autofocus>
                 @error('name')
                     <small>{{ $message }}</small>
                 @enderror

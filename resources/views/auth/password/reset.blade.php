@@ -19,7 +19,7 @@
             
             <label for="password">
                 @lang('Password')
-                <input type="password" name="password" @error('password') aria-invalid="true" @enderror>
+                <input type="password" name="password" @error('password') aria-invalid="true" @enderror autofocus>
                 @error('password')
                     <small>{{ $message }}</small>
                 @enderror

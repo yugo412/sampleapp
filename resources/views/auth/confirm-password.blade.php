@@ -10,7 +10,7 @@
 
                 <label for="password">
                     @lang('Password')
-                    <input type="password" name="password" placeholder="@lang('Please enter your current password')" @error('password') aria-invalid="true" @endif>
+                    <input type="password" name="password" placeholder="@lang('Please enter your current password')" @error('password') aria-invalid="true" @endif autofocus>
                     @error('password')
                         <small>{{ $message }}</small>
                     @enderror

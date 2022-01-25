@@ -25,6 +25,9 @@
 
                 <label for="email">
                     @lang('Email address')
+                    @if (auth()->user()->hasVerifiedEmail())
+                        (@lang('verified'))
+                    @endif
                     <input type="email" value="{{ $user->email }}" readonly disabled>
                 </label>
 
