@@ -31,6 +31,9 @@
 
         @yield('content')
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    @stack('script')
 </body>
 
 </html>

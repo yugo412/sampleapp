@@ -62,6 +62,16 @@ class AccountController extends Controller
     /**
      * @return View
      */
+    public function TwoFactorAuth(): View
+    {
+        return view('account.two-factor', [
+            'title' => __('Two-Factor Authentication'),
+        ]);
+    }
+
+    /**
+     * @return View
+     */
     public function delete(): View
     {
         return view('account.delete', [

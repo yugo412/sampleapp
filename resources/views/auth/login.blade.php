@@ -9,7 +9,7 @@
 
             <label for="email">
                 @lang('Email address')
-                <input type="email" name="email" value="{{ old('email') }}" @error('email') aria-invalid="true" @enderror>
+                <input type="email" name="email" value="{{ old('email') }}" @error('email') aria-invalid="true" @enderror autofocus>
                 @error('email')
                     <small>{{ $message }}</small>
                 @enderror

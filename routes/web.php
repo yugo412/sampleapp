@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::get('password', [AccountController::class, 'password'])->name('password');
     Route::patch('password', [AccountController::class, 'updatePassword']);
 
+    Route::get('two-factor-authentication', [AccountController::class, 'twoFactorAuth'])->name('2fa');
+
     Route::get('delete', [AccountController::class, 'delete'])->name('delete');
     Route::post('delete', [AccountController::class, 'deletePermanently']);
 });
