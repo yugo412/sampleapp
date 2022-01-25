@@ -3,8 +3,12 @@
 namespace App\Actions\Account;
 
 use App\Events\User\PasswordUpdated;
+use Exception;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Lorisleiva\Actions\Concerns\AsObject;
 
 final class UpdatePassword
@@ -18,11 +22,19 @@ final class UpdatePassword
      */
     public function handle(User $user, string $password): User
     {
-        $user->password = Hash::make($password);
-        $user->save();
+        try {
+            $user->password = Hash::make($password);
+            $user->save();
 
-        event(new PasswordUpdated($user));
+            event(new PasswordUpdated($user));
 
-        return $user;
+            Auth::logoutOtherDevices($password);
+
+            return $user;
+        } catch (Exception $e) {
+            Log::error($e);
+
+            abort(Response::HTTP_INTERNAL_SERVER_ERROR, $e->getMessage());
+        }
     }
 }
