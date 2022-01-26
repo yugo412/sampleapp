@@ -27,30 +27,32 @@
                 </label>
             </form>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>@lang('Created')</th>
-                        <th>@lang('Name')</th>
-                        <th>@lang('Key')</th>
-                        <th>@lang('Actions')</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (auth()->user()->tokens as $token)
+            @if(!auth()->user()->tokens->isEmpty())
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ $token->created_at->format('Y-m-d H:i') }} </td>
-                            <td>{{ $token->name }}</td>
-                            <td><span data-tooltip="{{ $token->token }}">***</span></td>
-                            <td>
-                                <a href="" data-tooltip="@lang('Copy API key')">Copy</a>
-                                <a href="">Delete</a>
-                            </td>
+                            <th>@lang('Created')</th>
+                            <th>@lang('Name')</th>
+                            <th>@lang('Key')</th>
+                            <th>@lang('Actions')</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        @foreach (auth()->user()->tokens as $token)
+                            <tr>
+                                <td>{{ $token->created_at->format('Y-m-d H:i') }} </td>
+                                <td>{{ $token->name }}</td>
+                                <td><span data-tooltip="{{ $token->token }}">***</span></td>
+                                <td>
+                                    <a href="" data-tooltip="@lang('Copy API key')">Copy</a>
+                                    <a href="">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </article>
     </div>
 </div>
