@@ -25,9 +25,15 @@
                 @lang('Remember me')
             </label>
 
-
-            <button type="submit">@lang('Log In')</button>
+            <label for="buttons">
+                <br>
+                <button type="submit">@lang('Log In')</button>
+            </label>
         </form>
+
+        <p>@lang('Forgot your password? <a href=":link">Click here</a> to reset password.', [
+            'link' => route('password.request'),
+        ])</p>
     </article>
 </div>
 @endsection

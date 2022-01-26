@@ -12,11 +12,11 @@
 
             @if (auth()->user()->hasEnabledTwoFactorAuthentication())
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-xs-12">
                         {!! auth()->user()->twoFactorQrCodeSvg() !!}
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 col-xs-12">
                         <p>@lang('Scan the QR code with your authenticator app to enable two-factor authentication.')</p>
 
                         <p><a href="" id="open-recovery-modal">Show recovery code</a></p>
