@@ -10,9 +10,13 @@ final class DeleteAccountPermanently
 {
     use AsObject;
 
+    /**
+     * @param User $user
+     * @return boolean
+     */
     public function handle(User $user): bool
     {
-        $deleted = $user->delete();
+        $deleted = $user->forceDelete();
 
         event(new AccountDeleted($user));
 
