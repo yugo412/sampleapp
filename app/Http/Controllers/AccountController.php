@@ -8,10 +8,8 @@ use App\Actions\Account\UpdateProfile;
 use App\Http\Requests\Account\DeleteAccountRequest;
 use App\Http\Requests\Account\UpdateAccountRequest;
 use App\Http\Requests\Account\UpdatePasswordRequest;
-use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
