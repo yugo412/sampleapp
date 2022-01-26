@@ -2,12 +2,15 @@
 
 namespace App\Http\Requests\Account;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
 class UpdatePasswordRequest extends FormRequest
 {
+    use PasswordValidationRules;
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +30,7 @@ class UpdatePasswordRequest extends FormRequest
     {
         return [
             'current_password' => ['required', 'current_password'],
-            'password' => ['required', Password::min(6), 'confirmed'],
+            'password' => $this->passwordRules(),
         ];
     }
 }
