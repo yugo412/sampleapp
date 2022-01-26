@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Account\CreateToken;
 use App\Actions\Account\DeleteAccountPermanently;
 use App\Actions\Account\UpdatePassword;
 use App\Actions\Account\UpdateProfile;
+use App\Events\User\TokenCreated;
+use App\Http\Requests\Account\CreateTokenRequest;
 use App\Http\Requests\Account\DeleteAccountRequest;
 use App\Http\Requests\Account\UpdateAccountRequest;
 use App\Http\Requests\Account\UpdatePasswordRequest;
@@ -86,5 +89,25 @@ class AccountController extends Controller
         DeleteAccountPermanently::run(Auth::user());
             
         return redirect()->route('home');
+    }
+
+    /**
+     * @return View
+     */
+    public function token(): View
+    {
+        return view('account.token', [
+            'title' => __('API Tokens'),
+        ]);
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function createToken(CreateTokenRequest $request): RedirectResponse
+    {
+        CreateToken::run(Auth::user(), $request->validated());
+
+        return redirect()->route('token');
     }
 }
