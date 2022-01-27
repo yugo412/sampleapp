@@ -5,7 +5,7 @@ namespace App\Actions\User;
 use App\Models\User;
 use Lorisleiva\Actions\Concerns\AsObject;
 
-final class GetSoleUser
+final class DeleteUser
 {
     use AsObject;
 
@@ -15,6 +15,9 @@ final class GetSoleUser
      */
     public function handle(int $id): User
     {
-        return User::whereId($id)->sole();
+        $user = GetSoleUser::run($id);
+        $user->delete();
+
+        return $user;
     }
 }

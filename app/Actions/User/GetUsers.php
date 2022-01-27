@@ -15,7 +15,7 @@ final class GetUsers
      * @param array $filters
      * @return LengthAwarePaginator
      */
-    public function handle(array $filters): LengthAwarePaginator
+    public function handle(array $filters = []): LengthAwarePaginator
     {
         return User::when(!empty($filters['role']), fn (Builder $builder) => $builder->role($filters['role']))
             ->paginate($filters['limit'] ?? 20);
