@@ -17,18 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('profile', [AccountController::class, 'profile'])->name('profile');
-    Route::patch('profile', [AccountController::class, 'updateProfile']);
+Route::middleware('auth')->controller(AccountController::class)->group(function () {
+    Route::get('profile', 'profile')->name('profile');
+    Route::patch('profile', 'updateProfile');
     
-    Route::get('password', [AccountController::class, 'password'])->name('password');
-    Route::patch('password', [AccountController::class, 'updatePassword']);
+    Route::get('password', 'password')->name('password');
+    Route::patch('password', 'updatePassword');
 
-    Route::get('two-factor-authentication', [AccountController::class, 'twoFactorAuth'])->name('2fa');
+    Route::get('two-factor-authentication', 'twoFactorAuth')->name('2fa');
 
-    Route::get('token', [AccountController::class, 'token'])->name('token');
-    Route::post('token', [AccountController::class, 'createToken']);
+    Route::get('token', 'token')->name('token');
+    Route::post('token', 'createToken');
 
-    Route::get('delete', [AccountController::class, 'delete'])->name('delete');
-    Route::post('delete', [AccountController::class, 'deletePermanently']);
+    Route::get('delete', 'delete')->name('delete');
+    Route::post('delete', 'deletePermanently');
 });
