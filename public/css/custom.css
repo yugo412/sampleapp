@@ -1,3 +1,4 @@
 th.text-right, td.text-right {
     text-align: end;
 }
+[x-cloak] { display: none !important; }

@@ -8,12 +8,11 @@
                 @csrf
                 @method('post')
 
-                <label for="password">
-                    @lang('Password')
-                    <input type="password" name="password" placeholder="@lang('Please enter your current password')" @error('password') aria-invalid="true" @endif autofocus>
-                    @error('password')
-                        <small>{{ $message }}</small>
-                    @enderror
+                <label for="password" x-data="{ type : 'password' }">
+                    @lang('Password') 
+                    <span x-cloack x-show="type === 'password'">(<a href="#" @click="type = 'text'">show password</a>)</span>
+                    <span x-cloack x-show="type !== 'password'">(<a href="#" @click="type = 'password'">hide password</a>)</span>
+                    <input :type="type" name="password" @error('password') aria-invalid="true" placeholder="@lang('Please enter your current password')" @enderror>
                 </label>
 
                 <label for="buttons">

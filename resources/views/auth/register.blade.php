@@ -23,12 +23,11 @@
                 @enderror
             </label>
             
-            <label for="password">
-                @lang('Password')
-                <input type="password" name="password" @error('password') aria-invalid="true" @enderror>
-                @error('password')
-                    <small>{{ $message }}</small>
-                @enderror
+            <label for="password" x-data="{ type : 'password' }">
+                @lang('Password') 
+                <span x-cloack x-show="type === 'password'">(<a href="#" @click.prevent="type = 'text'">show password</a>)</span>
+                <span x-cloack x-show="type !== 'password'">(<a href="#" @click.prevent="type = 'password'">hide password</a>)</span>
+                <input :type="type" name="password" @error('password') aria-invalid="true" @enderror>
             </label>
             
             <label for="password_confirmation">
