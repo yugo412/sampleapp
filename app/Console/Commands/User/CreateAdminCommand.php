@@ -3,8 +3,11 @@
 namespace App\Console\Commands\User;
 
 use App\Models\User;
+use App\Providers\AuthServiceProvider;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class CreateAdminCommand extends Command
 {
@@ -54,11 +57,17 @@ class CreateAdminCommand extends Command
         $user['name'] = $this->ask(__('What is the name?'));
         $user['password'] = $this->secret(__('What is the password?'));
 
-        if ($this->confirm(__('Are you sure to continue this action?'))) {
+        if ($this->confirm(__('Are you sure to continue this action?'), true)) {
             $user['password'] = Hash::make($user['password']);
-            User::create($user);
+            
+            DB::transaction(function() use($user){
+                $user = User::create($user);
+                $user->assignRole(
+                    Role::firstOrCreate(['name' => AuthServiceProvider::ADMIN_ROLE]),
+                );
 
-            $this->info(__('Admin created successfully.'));
+                $this->info(__('Admin created successfully.'));
+            });
         }
 
         return 0;
