@@ -31,7 +31,7 @@
         @yield('content')
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/umbrellajs"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @stack('script')
 </body>
 
