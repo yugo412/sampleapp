@@ -18,19 +18,24 @@
     <main class="container">
         <nav>
             <ul>
-                <li><strong>{{ config('app.name') }}</strong></li>
+                <li><a href="{{ route('home') }}"><i class="fa fa-home fa-fw"></i> <strong>{{ config('app.name')  }}</strong></a></li>
             </ul>
             <ul>
                 @auth
+                    @can('user:view')
+                        <li><a href="{{ route('user') }}">@lang('User')</a></li>
+                    @endcan
                     <li><a href="{{ route('profile') }}">@lang('Account (:name)', ['name' => auth()->user()->name])</a></li>
                 @else
                     <li><a href="{{ route('login') }}">@lang('Log In')</a></li>
                     <li><a href="{{ route('register') }}">@lang('Register')</a></li>
                 @endauth
+                    <li><a href="https://github.com/yugo412/sampleapp" target="_blank"><i class="fa fa-code fa-fw" title="@lang('Open code repository')"></i></a></li>
             </ul>
         </nav>
 
         @yield('content')
+        {{ $slot ?? null }}
     </main>
 
     <script src="//unpkg.com/alpinejs" defer></script>
