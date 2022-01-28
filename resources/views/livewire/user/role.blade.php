@@ -24,40 +24,42 @@
             </form>
             @endif
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>@lang('Created')</th>
-                        <th>@lang('Name')</th>
-                        <!-- <th>@lang('Guard')</th> -->
-                        <th class="text-right">@lang('Users')</th>
-                        <th class="text-right">@lang('Actions')</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($roles as $role)
+            <figure>
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ $role->created_at->format('Y-m-d H:i') }}</td>
-                            <td>{{ $role->name }}</td>
-                            <!-- <td>{{ $role->guard_name }}</td> -->
-                            <td class="text-right">{{ number_format($role->users_count) }}</td>
-                            <td class="text-right">
-                                @can('edit role')
-                                    <a href="#" wire:click.prevent="edit({{ $role }})"><i class="fa fa-fw fa-edit"></i></a>
-                                @endcan
-                                @can('delete role')
-                                    @if ($role->users_count == 0)
-                                        <a href="#" wire:click.prevent="delete({{ $role->id }})"><i class="fa fa-fw fa-trash"></i></a>
-                                    @else
-                                        <i class="fa fa-trash fa-fw"></i>                                        
-                                    @endif
-                                @endcan
-                            </td>
+                            <th>@lang('Created')</th>
+                            <th>@lang('Name')</th>
+                            <!-- <th>@lang('Guard')</th> -->
+                            <th class="text-right">@lang('Users')</th>
+                            <th class="text-right">@lang('Actions')</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($roles as $role)
+                            <tr>
+                                <td>{{ $role->created_at->format('Y-m-d H:i') }}</td>
+                                <td>{{ $role->name }}</td>
+                                <!-- <td>{{ $role->guard_name }}</td> -->
+                                <td class="text-right">{{ number_format($role->users_count) }}</td>
+                                <td class="text-right">
+                                    @can('edit role')
+                                        <a href="#" wire:click.prevent="edit({{ $role }})"><i class="fa fa-fw fa-edit"></i></a>
+                                    @endcan
+                                    @can('delete role')
+                                        @if ($role->users_count == 0)
+                                            <a href="#" wire:click.prevent="delete({{ $role->id }})"><i class="fa fa-fw fa-trash"></i></a>
+                                        @else
+                                            <i class="fa fa-trash fa-fw"></i>                                        
+                                        @endif
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </figure>
         </article>
     </div>
 </div>

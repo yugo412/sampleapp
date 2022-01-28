@@ -24,7 +24,7 @@ class Token extends Component
      * @param [type] $id
      * @return void
      */
-    public function deleteToken($id): void
+    public function delete(int $id): void
     {
         try {
             $token = Auth::user()->tokens()->findOrFail($id);

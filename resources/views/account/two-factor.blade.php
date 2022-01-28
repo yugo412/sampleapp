@@ -46,9 +46,9 @@
             @endif
 
             @if(!auth()->user()->hasEnabledTwoFactorAuthentication())
-                <p>@lang('With 2-Step Verification, you’ll protect your account with both your password and your
+                <p>@lang('With Two-Factor Authentication, you’ll protect your account with both your password and your
                     phone.')</p>
-                <p>@lang('Read more about two factor authentication at :link.', [
+                <p>@lang('Read more about Two-Factor Authentication at :link.', [
                     'link' => '<a href="https://en.wikipedia.org/wiki/Multi-factor_authentication"
                         target="_blank">Wikipedia</a>',
                     ])</p>

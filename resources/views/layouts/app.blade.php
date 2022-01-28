@@ -18,7 +18,12 @@
     <main class="container">
         <nav>
             <ul>
-                <li><a href="{{ route('home') }}"><i class="fa fa-home fa-fw"></i> <strong>{{ config('app.name')  }}</strong></a></li>
+                <li>
+                    <a href="{{ route('home') }}"><i class="fa fa-home fa-fw"></i>
+                        @guest
+                            <strong>{{ config('app.name')  }}</strong>
+                        @endguest
+                    </a></li>
             </ul>
             <ul>
                 @auth

@@ -19,6 +19,7 @@ final class GetUsers
     {
         return User::when(!empty($filters['role']), fn (Builder $builder): Builder => $builder->role($filters['role']))
             ->when(!empty($filters['sort']), fn (Builder $builder): Builder => $builder->sort($filters['sort']))
+            ->with('roles')
             ->paginate($filters['limit'] ?? 20);
     }
 }
