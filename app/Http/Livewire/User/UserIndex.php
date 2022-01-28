@@ -16,10 +16,12 @@ class UserIndex extends Component
      * @return View
      */
     public function render(): View
-    {
+    {        
         return view('livewire.user.index', [
                 'title' => __('Users'),
-                'users' => GetUsers::run(),
+                'users' => GetUsers::run([
+                    'sort' => '-name',
+                ]),
             ])
             ->layout('layouts.app');
     }
@@ -30,7 +32,7 @@ class UserIndex extends Component
      */
     public function delete(int $id): void
     {
-        abort_if(!Auth::user()->can('user:delete') || $id === Auth::id(), Response::HTTP_FORBIDDEN);
+        abort_if(!Auth::user()->can('delete user') || $id === Auth::id(), Response::HTTP_FORBIDDEN);
 
         DeleteUser::run($id);
     }
@@ -41,7 +43,7 @@ class UserIndex extends Component
      */
     public function disableTwoFactor(int $id): void
     {
-        abort_if(!Auth::user()->can('user:disable_2fa'), Response::HTTP_FORBIDDEN);
+        abort_if(!Auth::user()->can('disable user 2fa'), Response::HTTP_FORBIDDEN);
 
         DisableTwoFactor::run($id);
     }

@@ -22,8 +22,11 @@
             </ul>
             <ul>
                 @auth
-                    @can('user:view')
+                    @can('view user')
                         <li><a href="{{ route('user') }}">@lang('User')</a></li>
+                    @endcan
+                    @can('view role')
+                        <li><a href="{{ route('role') }}">@lang('Role')</a></li>                        
                     @endcan
                     <li><a href="{{ route('profile') }}">@lang('Account (:name)', ['name' => auth()->user()->name])</a></li>
                 @else

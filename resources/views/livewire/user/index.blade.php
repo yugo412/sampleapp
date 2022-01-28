@@ -17,7 +17,7 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td><span data-tooltip="{{ $user->created_at }}">{{ $user->created_at->diffForHumans()  }}</span></td>
+                            <td>{{ $user->updated_at->format('Y-m-d H:i') }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -28,7 +28,7 @@
                                 @endif
                             </td>
                             <td class="text-right">
-                                @can('user:delete')
+                                @can('delete user')
                                     @if ($user->id === auth()->id())
                                         <i class="fa fa-trash fa-fw"></i>
                                     @else

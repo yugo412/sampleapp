@@ -17,10 +17,15 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'user:view',
-            'user:edit',
-            'user:delete',
-            'user:disable_2fa',
+            'view user',
+            'edit user',
+            'delete user',
+            'disable user 2fa',
+            'view role',
+            'delete role',
+            'edit role',
+            'delete role',
+            'view permission',
         ];
 
         $role = Role::firstOrCreate(['name' => AuthServiceProvider::ADMIN_ROLE]);
@@ -30,7 +35,7 @@ class PermissionSeeder extends Seeder
                 'guard_name' => config('auth.defaults.guard'),
             ]);
 
-            $role->syncPermissions($permission);
+            $role->givePermissionTo($permission);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\User\RoleIndex;
 use App\Http\Livewire\User\UserIndex;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,6 @@ Route::middleware('auth')->controller(AccountController::class)->group(function 
     Route::get('delete', 'delete')->name('delete');
     Route::post('delete', 'deletePermanently');
 
-    Route::get('user', UserIndex::class)->name('user');
+    Route::get('user', UserIndex::class)->middleware('can:view user')->name('user');
+    Route::get('role', RoleIndex::class)->middleware('can:view role')->name('role');
 });

@@ -28,6 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::before(fn ($user, $ability): ?bool => $user->hasRole(self::ADMIN_ROLE) ? true : null);
+        // Gate::before(fn ($user, $ability): ?bool => $user->hasRole(self::ADMIN_ROLE) ? true : null);
     }
 }
