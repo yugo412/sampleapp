@@ -15,9 +15,9 @@
                 @enderror
             </label>
             
-            <label for="email">
+            <label for="email" x-data="email">
                 @lang('Email address')
-                <input type="email" name="email" value="{{ old('email') }}" @error('email') aria-invalid="true" @enderror>
+                <input x-model="address" @change="checkEmail" type="email" name="email" value="{{ old('email') }}" @error('email') aria-invalid="true" @enderror autocomplete="off" :aria-invalid="email.exist">
                 @error('email')
                     <small>{{ $message }}</small>
                 @enderror
@@ -41,3 +41,29 @@
     </article>
 </div>
 @endsection
+
+@push('script')
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('email', () => ({
+            address: "{{ old('email') }}",
+            email: { 
+                exist:  '{{ $errors->has("email") }}' !== '',
+            },
+ 
+            async checkEmail() {
+                this.email = await (await fetch("{{ route('api.email.check') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({
+                        address: this.address
+                    }),
+                })).json()
+            }
+        }))
+    })
+</script>
+@endpush
