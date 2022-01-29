@@ -4,7 +4,7 @@
             <aside>
                 <nav>
                     <ul>
-                        <li><a href="{{ route('profile') }}">@lang('Edit')</a></li>
+                        <li><a href="{{ route('user.edit', $user->getKey()) }}">@lang('Edit')</a></li>
                         <li><a href="{{ route('user') }}">@lang('Back')</a></li>
                         <hr>
                         <li>

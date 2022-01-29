@@ -26,10 +26,10 @@
                                 <td>{{ $user->email }}</td>
                                 <td class="text-right">
                                     @can('edit user')
-                                        <a href="#"><i class="fa fa-fw fa-edit"></i></a>
+                                        <a href="{{ route('user.edit', $user->getKey()) }}"><i class="fa fa-fw fa-edit"></i></a>
                                     @endcan
                                     @can('delete user')
-                                        @if ($user->id === auth()->id())
+                                        @if ($user->getKey() === auth()->id())
                                             <i class="fa fa-trash fa-fw"></i>
                                         @else
                                             @if ($user->trashed())
