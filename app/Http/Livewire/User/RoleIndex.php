@@ -6,6 +6,7 @@ use App\Actions\User\Role\DeleteRole;
 use App\Actions\User\Role\GetRoles;
 use App\Actions\User\Role\GetSoleRole;
 use App\Actions\User\Role\UpdateRole;
+use App\Providers\AuthServiceProvider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,11 @@ class RoleIndex extends Component
     public $name;
 
     /**
+     * @var string
+     */
+    public $oldName;
+
+    /**
      * @var array
      */
     protected $rules = [
@@ -37,10 +43,11 @@ class RoleIndex extends Component
     public function render(): View
     {
         return view('livewire.user.role', [
-                'title' => __('Roles'),
-                'roles' => GetRoles::run(),
-            ])
-            ->layout('layouts.app');
+            'title' => __('Roles'),
+            'roles' => GetRoles::run(),
+            'totalUser' => 0,
+            'adminRole' => AuthServiceProvider::ADMIN_ROLE,
+        ]);
     }
 
     /**
@@ -50,7 +57,7 @@ class RoleIndex extends Component
     public function edit(array $role): void
     {
         $this->key = $role['id'];
-        $this->name = $role['name'];
+        $this->name = $this->oldName = $role['name'];
     }
 
     /**
@@ -61,6 +68,12 @@ class RoleIndex extends Component
         abort_if(!Auth::user()->can('edit role'), Response::HTTP_FORBIDDEN);
 
         $this->validate();
+
+        abort_if(
+            $this->oldName === AuthServiceProvider::ADMIN_ROLE,
+            Response::HTTP_FORBIDDEN,
+            __('You cannot edit the admin role.'),
+        );
 
         UpdateRole::run($this->key, ['name' => $this->name]);
         $this->key = null;

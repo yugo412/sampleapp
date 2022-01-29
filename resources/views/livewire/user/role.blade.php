@@ -45,7 +45,11 @@
                                 <td class="text-right">{{ number_format($role->users_count) }}</td>
                                 <td class="text-right">
                                     @can('edit role')
-                                        <a href="#" wire:click.prevent="edit({{ $role }})"><i class="fa fa-fw fa-edit"></i></a>
+                                        @if ($role->name !== $adminRole)
+                                            <a href="#" wire:click.prevent="edit({{ $role }})"><i class="fa fa-fw fa-edit"></i></a>
+                                        @else
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        @endif
                                     @endcan
                                     @can('delete role')
                                         @if ($role->users_count == 0)
@@ -56,8 +60,17 @@
                                     @endcan
                                 </td>
                             </tr>
+
+                            @php $totalUser += $role->users_count @endphp
                         @endforeach
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">@lang('Total users')</td>
+                            <td class="text-right">{{ $totalUser }}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </figure>
         </article>
