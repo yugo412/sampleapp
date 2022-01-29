@@ -3,6 +3,10 @@
         <article>
             <h4>{{ $title }}</h4>
 
+                <label for="query">
+                    <input wire:model="query" type="text" placeholder="@lang('Search users...')" autofocus>
+                </label>
+
             <figure>
                 <table>
                     <thead>
@@ -10,8 +14,6 @@
                             <th>@lang('Registered')</th>
                             <th>@lang('Name')</th>
                             <th>@lang('Email')</th>
-                            <th>@lang('Role')</th>
-                            <th>@lang('Two-Factor Auth')</th>
                             <th class="text-right">@lang('Actions')</th>
                         </tr>
                     </thead>
@@ -20,16 +22,8 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->created_at->format('Y-m-d H:i') }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td><a href="{{ route('user.view', $user->getKey()) }}">{{ $user->name }}</a></td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ implode(', ', $user->roles->map(fn($role) => $role->name)->toArray()) }}</td>
-                                <td>
-                                    @if ($user->hasEnabledTwoFactorAuthentication())
-                                        <input type="checkbox" wire:change="disableTwoFactor({{ $user->getKey() }})" role="switch" checked>
-                                    @else
-                                        <input type="checkbox" role="switch" disabled>
-                                    @endif
-                                </td>
                                 <td class="text-right">
                                     @can('edit user')
                                         <a href="#"><i class="fa fa-fw fa-edit"></i></a>
@@ -48,7 +42,17 @@
                                 </td>
                             </tr>
                         @endforeach
+
+                        
                     </tbody>
+
+                    @if($users->isEmpty())
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">@lang('No users found.')</td>
+                            </tr>
+                        </tfoot>
+                    @endif
                 </table>
 
                 @if (!empty($deleteUser))
