@@ -19,6 +19,11 @@ class UserIndex extends Component
     public $deleteUser = [];
 
     /**
+     * @var string
+     */
+    public $query;
+
+    /**
      * @return View
      */
     public function render(): View
@@ -26,6 +31,7 @@ class UserIndex extends Component
         return view('livewire.user.index', [
                 'title' => __('Users'),
                 'users' => GetUsers::run([
+                    'query' => $this->query,
                     'sort' => '-name',
                     'trashed' => true,
                 ]),
