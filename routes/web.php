@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\User\Permission\PermissionIndex;
 use App\Http\Livewire\User\RoleIndex;
 use App\Http\Livewire\User\UserEdit;
 use App\Http\Livewire\User\UserIndex;
@@ -40,4 +41,5 @@ Route::middleware('auth')->controller(AccountController::class)->group(function 
     Route::get('user/{id}', UserView::class)->middleware('can:view user')->name('user.view');
     Route::get('user/edit/{id}', UserEdit::class)->middleware('can:edit user')->name('user.edit');
     Route::get('role', RoleIndex::class)->middleware('can:view role')->name('role');
+    Route::get('permission', PermissionIndex::class)->middleware('can:view permission')->name('permission');
 });
