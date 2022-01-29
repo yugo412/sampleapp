@@ -2,6 +2,19 @@
 
 return [
 
+    'all' => [
+        'view user',
+        'edit user',
+        'delete user',
+        'restore user',
+        'disable user 2fa',
+        'view role',
+        'delete role',
+        'edit role',
+        'delete role',
+        'view permission',
+    ],
+
     'models' => [
 
         /*
