@@ -3,6 +3,7 @@
 namespace App\Actions\User;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Lorisleiva\Actions\Concerns\AsObject;
 
 final class GetSoleUser
@@ -11,10 +12,13 @@ final class GetSoleUser
 
     /**
      * @param integer $id
+     * @param boolean $inTrash
      * @return User
      */
-    public function handle(int $id): User
+    public function handle(int $id, bool $inTrash = false): User
     {
-        return User::whereId($id)->sole();
+        return User::whereId($id)
+            ->when($inTrash, fn(Builder $builder) => $builder->withTrashed())
+            ->sole();
     }
 }

@@ -11,12 +11,17 @@ final class DeleteUser
 
     /**
      * @param integer $id
+     * @param boolean $permanent
      * @return User
      */
-    public function handle(int $id): User
+    public function handle(int $id, bool $permanent = false): User
     {
         $user = GetSoleUser::run($id);
-        $user->delete();
+        if ($permanent === true) {
+            $user->forceDelete();
+        } else {
+            $user->delete();
+        } 
 
         return $user;
     }
